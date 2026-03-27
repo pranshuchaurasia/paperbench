@@ -1,0 +1,552 @@
+exam:
+  title: "LLM Fine-Tuning Assessment"
+  description: "Evaluate understanding of LLM fine-tuning concepts including when to fine-tune, RAG vs fine-tuning, memory considerations, and application development flows."
+  version: "1.0"
+  author: "PaperBench Author"
+  created_at: "2026-03-27"
+
+settings:
+  timer_mode: "global"
+  total_time_minutes: 30
+  shuffle_questions: true
+  shuffle_options: true
+  allow_review: true
+  show_correct_after_submit: true
+  pass_percentage: 70
+  negative_marking:
+    enabled: false
+    mode: "fixed"
+    value: 0.25
+  theme: "system"
+
+sections:
+  - name: "Fine-Tuning Fundamentals"
+    questions:
+      - id: "ft1"
+        type: "single_choice"
+        difficulty: "easy"
+        points: 1
+        question: "What is the typical data format used for fine-tuning with preference optimization?"
+        options:
+          - id: "a"
+            text: "(input, output)"
+          - id: "b"
+            text: "(instruction, winning response, losing response)"
+          - id: "c"
+            text: "(prompt, completion, score)"
+          - id: "d"
+            text: "(question, answer, context)"
+        correct_answer: "b"
+        explanation: "Fine-tuning data typically follows the format of an instruction paired with a winning (preferred) response and a losing (rejected) response."
+        tags: ["fine-tuning", "data-format"]
+
+      - id: "ft2"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "Fine-tuning can be used to improve both general capability and task-specific capability of a model."
+        correct_answer: "true"
+        explanation: "Fine-tuning improves model quality across both general and task-specific capabilities."
+        tags: ["fine-tuning", "model-quality"]
+
+      - id: "ft3"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "Which of the following is a key reason to fine-tune a language model?"
+        options:
+          - id: "a"
+            text: "To eliminate the need for any prompt engineering"
+          - id: "b"
+            text: "To generate output following specific structures such as YAML"
+          - id: "c"
+            text: "To guarantee zero hallucinations"
+          - id: "d"
+            text: "To permanently reduce model size on disk"
+        correct_answer: "b"
+        explanation: "One key reason to fine-tune is to make the model generate output following specific structures, such as YAML or other formats."
+        tags: ["fine-tuning", "reasons"]
+
+      - id: "ft4"
+        type: "multiple_choice"
+        difficulty: "medium"
+        points: 3
+        question: "Which of the following are valid reasons to fine-tune a language model?"
+        options:
+          - id: "a"
+            text: "Improve model quality in both general and task-specific capabilities"
+          - id: "b"
+            text: "Generate output following specific structures (e.g. YAML)"
+          - id: "c"
+            text: "Bias mitigation for certain models"
+          - id: "d"
+            text: "Replace the need for any infrastructure or hosting"
+        correct_answers: ["a", "b", "c"]
+        partial_credit: true
+        explanation: "Fine-tuning can improve quality, enforce output structures, and mitigate bias. However, it does not eliminate hosting requirements."
+        tags: ["fine-tuning", "reasons"]
+
+      - id: "ft5"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "Fine-tuning can be used for bias mitigation in language models."
+        correct_answer: "true"
+        explanation: "Fine-tuning is listed as a technique for bias mitigation, for example in Chinese-language models."
+        tags: ["fine-tuning", "bias-mitigation"]
+
+      - id: "ft6"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "How can fine-tuning relate to model distillation?"
+        options:
+          - id: "a"
+            text: "Fine-tuning cannot be used for distillation"
+          - id: "b"
+            text: "A smaller fine-tuned model can outperform larger models on specific tasks"
+          - id: "c"
+            text: "Distillation always requires fine-tuning the larger model first"
+          - id: "d"
+            text: "Fine-tuning and distillation are completely unrelated techniques"
+        correct_answer: "b"
+        explanation: "Through fine-tuning, a smaller model can be distilled from a larger one and can outperform the larger model on targeted tasks."
+        tags: ["fine-tuning", "distillation"]
+
+  - name: "Reasons Not to Fine-Tune"
+    questions:
+      - id: "nft1"
+        type: "multiple_choice"
+        difficulty: "medium"
+        points: 3
+        question: "Which of the following are valid reasons NOT to fine-tune a model?"
+        options:
+          - id: "a"
+            text: "You need knowledge on how to train models"
+          - id: "b"
+            text: "Improving performance on one task may reduce performance on another"
+          - id: "c"
+            text: "Hosting a fine-tuned model can be an issue"
+          - id: "d"
+            text: "Fine-tuning always takes more than a year"
+        correct_answers: ["a", "b", "c"]
+        partial_credit: true
+        explanation: "Expertise requirements, task performance trade-offs, and hosting costs are all valid reasons not to fine-tune."
+        tags: ["fine-tuning", "trade-offs"]
+
+      - id: "nft2"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "Improving a fine-tuned model's performance on one task can sometimes reduce its performance on another task."
+        correct_answer: "true"
+        explanation: "This is a known trade-off of fine-tuning — optimizing for one task may degrade performance on others."
+        tags: ["fine-tuning", "trade-offs"]
+
+      - id: "nft3"
+        type: "single_choice"
+        difficulty: "easy"
+        points: 1
+        question: "Which of the following is a practical challenge when deciding to fine-tune?"
+        options:
+          - id: "a"
+            text: "Fine-tuned models cannot generate text"
+          - id: "b"
+            text: "Hosting the fine-tuned model can be an issue"
+          - id: "c"
+            text: "Fine-tuning always requires millions of examples"
+          - id: "d"
+            text: "Fine-tuned models lose all prior knowledge"
+        correct_answer: "b"
+        explanation: "Hosting a custom fine-tuned model introduces infrastructure costs and complexity."
+        tags: ["fine-tuning", "hosting"]
+
+      - id: "nft4"
+        type: "true_false"
+        difficulty: "medium"
+        points: 2
+        question: "Fine-tuning requires no prior knowledge of how to train machine learning models."
+        correct_answer: "false"
+        explanation: "One of the reasons not to fine-tune is that you need knowledge on how to train models — it is not a zero-expertise process."
+        tags: ["fine-tuning", "prerequisites"]
+
+  - name: "Fine-Tuning and Token Optimization"
+    questions:
+      - id: "tok1"
+        type: "true_false"
+        difficulty: "medium"
+        points: 2
+        question: "Fine-tuning can help optimize token usage, which was especially relevant before prompt caching became available."
+        correct_answer: "true"
+        explanation: "Fine-tuning can reduce the number of tokens needed per request. This was particularly valuable before prompt caching techniques were introduced."
+        tags: ["fine-tuning", "token-optimization"]
+
+      - id: "tok2"
+        type: "single_choice"
+        difficulty: "hard"
+        points: 3
+        question: "Why did fine-tuning's role in token optimization become less critical over time?"
+        options:
+          - id: "a"
+            text: "Models stopped using tokens altogether"
+          - id: "b"
+            text: "Prompt caching techniques reduced the need for token optimization via fine-tuning"
+          - id: "c"
+            text: "Fine-tuning started increasing token usage"
+          - id: "d"
+            text: "Tokenizers were removed from all models"
+        correct_answer: "b"
+        explanation: "The introduction of prompt caching provided an alternative way to optimize token usage, reducing the need for fine-tuning purely for that purpose."
+        tags: ["fine-tuning", "token-optimization", "prompt-caching"]
+
+  - name: "Fine-Tuning and RAG"
+    questions:
+      - id: "rag1"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "When a model's output is factually correct but irrelevant to the task, what kind of issue does this represent?"
+        options:
+          - id: "a"
+            text: "A hallucination problem"
+          - id: "b"
+            text: "A behavioral issue that fine-tuning might help resolve"
+          - id: "c"
+            text: "A tokenization error"
+          - id: "d"
+            text: "A context window overflow"
+        correct_answer: "b"
+        explanation: "When a model produces factually correct but irrelevant output, this is a behavioral issue. Fine-tuning can help align the model's behavior to the task."
+        tags: ["fine-tuning", "rag", "behavioral-issues"]
+
+      - id: "rag2"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "Fine-tuning can help when a model has behavioral issues, such as producing factually correct but task-irrelevant output."
+        correct_answer: "true"
+        explanation: "Behavioral issues like task-irrelevant output are a good use case for fine-tuning."
+        tags: ["fine-tuning", "rag", "behavioral-issues"]
+
+      - id: "rag3"
+        type: "single_choice"
+        difficulty: "hard"
+        points: 3
+        question: "What is 'semantic parsing' in the context of fine-tuning?"
+        options:
+          - id: "a"
+            text: "Converting text to audio representations"
+          - id: "b"
+            text: "A category of tasks whose success depends on the model's ability to generate output in a specific format"
+          - id: "c"
+            text: "A technique for compressing model weights"
+          - id: "d"
+            text: "Splitting documents into sentence-level embeddings"
+        correct_answer: "b"
+        explanation: "Semantic parsing refers to tasks where success depends on generating output in a specific format, such as JSON."
+        tags: ["fine-tuning", "semantic-parsing"]
+
+      - id: "rag4"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "Which is an example of a semantic parsing task that fine-tuning can improve?"
+        options:
+          - id: "a"
+            text: "Asking the model to generate creative poetry"
+          - id: "b"
+            text: "Asking the model to generate output in JSON format"
+          - id: "c"
+            text: "Asking the model to summarize a long document"
+          - id: "d"
+            text: "Asking the model to translate between languages"
+        correct_answer: "b"
+        explanation: "Generating structured output in a specific format like JSON is a classic semantic parsing task that benefits from fine-tuning."
+        tags: ["fine-tuning", "semantic-parsing", "json"]
+
+  - name: "Application Development Flows"
+    questions:
+      - id: "dev1"
+        type: "single_choice"
+        difficulty: "easy"
+        points: 1
+        question: "In a typical application development flow, what is the recommended first step before considering fine-tuning?"
+        options:
+          - id: "a"
+            text: "Fine-tuning immediately"
+          - id: "b"
+            text: "Prompt engineering"
+          - id: "c"
+            text: "Building a custom model from scratch"
+          - id: "d"
+            text: "Deploying to production"
+        correct_answer: "b"
+        explanation: "The development flow starts with prompt engineering before progressing to more complex approaches like adding examples, retrieval, or fine-tuning."
+        tags: ["development-flow", "prompt-engineering"]
+
+      - id: "dev2"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "In the application development flow, what typically comes after prompt engineering?"
+        options:
+          - id: "a"
+            text: "Fine-tuning"
+          - id: "b"
+            text: "Adding examples (few-shot)"
+          - id: "c"
+            text: "Deploying to production"
+          - id: "d"
+            text: "Replacing the model entirely"
+        correct_answer: "b"
+        explanation: "After prompt engineering, the next step is adding examples (few-shot prompting) before moving to retrieval or fine-tuning."
+        tags: ["development-flow", "few-shot"]
+
+      - id: "dev3"
+        type: "multiple_choice"
+        difficulty: "hard"
+        points: 4
+        question: "According to the application development flow, after adding examples, which two divergent paths can a developer take?"
+        options:
+          - id: "a"
+            text: "Add simple retrieval, then complex retrieval (RAG path)"
+          - id: "b"
+            text: "Fine-tune the model (fine-tuning path)"
+          - id: "c"
+            text: "Retrain the model from scratch"
+          - id: "d"
+            text: "Abandon the project and use a different model"
+        correct_answers: ["a", "b"]
+        partial_credit: true
+        explanation: "The two paths are: (1) adding retrieval (simple then complex, i.e. RAG) for context optimization, or (2) fine-tuning for behavior optimization."
+        tags: ["development-flow", "rag", "fine-tuning"]
+
+      - id: "dev4"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "In the development flow, RAG (Retrieval-Augmented Generation) is primarily described as a form of:"
+        options:
+          - id: "a"
+            text: "Behavior optimization"
+          - id: "b"
+            text: "Context optimization"
+          - id: "c"
+            text: "Weight optimization"
+          - id: "d"
+            text: "Tokenizer optimization"
+        correct_answer: "b"
+        explanation: "RAG is described as a context optimization approach, while fine-tuning is described as behavior optimization."
+        tags: ["rag", "context-optimization"]
+
+      - id: "dev5"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "Fine-tuning is primarily described as a form of:"
+        options:
+          - id: "a"
+            text: "Context optimization"
+          - id: "b"
+            text: "Behavior optimization"
+          - id: "c"
+            text: "Data optimization"
+          - id: "d"
+            text: "Hardware optimization"
+        correct_answer: "b"
+        explanation: "Fine-tuning is positioned as behavior optimization, in contrast to RAG which is context optimization."
+        tags: ["fine-tuning", "behavior-optimization"]
+
+      - id: "dev6"
+        type: "true_false"
+        difficulty: "medium"
+        points: 2
+        question: "Whether to use more complex retrieval (RAG) or fine-tuning depends on each application and its failure modes."
+        correct_answer: "true"
+        explanation: "The choice between RAG and fine-tuning depends on the specific application's needs and what types of failures it experiences."
+        tags: ["development-flow", "rag", "fine-tuning"]
+
+      - id: "dev7"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "Fine-tuning should always be the first approach tried when building an LLM application."
+        correct_answer: "false"
+        explanation: "Fine-tuning comes later in the development flow. Prompt engineering and adding examples should be tried first."
+        tags: ["development-flow", "fine-tuning"]
+
+      - id: "dev8"
+        type: "single_choice"
+        difficulty: "hard"
+        points: 3
+        question: "A RAG pipeline combined with a fine-tuned model represents which type of optimization?"
+        options:
+          - id: "a"
+            text: "Context optimization only"
+          - id: "b"
+            text: "Behavior optimization only"
+          - id: "c"
+            text: "Both context and behavior optimization together"
+          - id: "d"
+            text: "Neither — they cancel each other out"
+        correct_answer: "c"
+        explanation: "Combining RAG (context optimization) with a fine-tuned model (behavior optimization) provides both forms of optimization simultaneously."
+        tags: ["rag", "fine-tuning", "optimization"]
+
+  - name: "Memory and Compute Considerations"
+    questions:
+      - id: "mem1"
+        type: "multiple_choice"
+        difficulty: "hard"
+        points: 4
+        question: "Which of the following are key contributors to the memory footprint during fine-tuning?"
+        options:
+          - id: "a"
+            text: "Number of parameters"
+          - id: "b"
+            text: "Number of trainable parameters"
+          - id: "c"
+            text: "Numerical representation of the parameters (precision)"
+          - id: "d"
+            text: "The color scheme of the training dashboard"
+        correct_answers: ["a", "b", "c"]
+        partial_credit: true
+        explanation: "Memory footprint depends on total parameter count, how many are trainable, and the numerical precision used to represent them."
+        tags: ["memory", "fine-tuning", "compute"]
+
+      - id: "mem2"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "Why does the number of trainable parameters matter for the memory footprint during fine-tuning?"
+        options:
+          - id: "a"
+            text: "Only trainable parameters require gradient storage and optimizer states"
+          - id: "b"
+            text: "Trainable parameters are stored on disk, not in memory"
+          - id: "c"
+            text: "Trainable parameters do not affect memory at all"
+          - id: "d"
+            text: "More trainable parameters always reduce memory usage"
+        correct_answer: "a"
+        explanation: "Trainable parameters require storing gradients and optimizer states in addition to the parameters themselves, significantly increasing memory usage."
+        tags: ["memory", "fine-tuning", "gradients"]
+
+      - id: "mem3"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "The numerical representation (precision) of model parameters affects the memory footprint during fine-tuning."
+        correct_answer: "true"
+        explanation: "Using lower precision (e.g., float16 vs float32) reduces memory per parameter, directly impacting the overall memory footprint."
+        tags: ["memory", "precision"]
+
+      - id: "mem4"
+        type: "single_choice"
+        difficulty: "hard"
+        points: 3
+        question: "If you want to reduce the memory bottleneck during fine-tuning, which approach addresses the 'number of trainable parameters' factor?"
+        options:
+          - id: "a"
+            text: "Using a larger model"
+          - id: "b"
+            text: "Using parameter-efficient fine-tuning methods like LoRA"
+          - id: "c"
+            text: "Increasing the batch size"
+          - id: "d"
+            text: "Using more training data"
+        correct_answer: "b"
+        explanation: "Parameter-efficient methods like LoRA reduce the number of trainable parameters, directly lowering memory requirements while still adapting the model."
+        tags: ["memory", "fine-tuning", "lora"]
+
+  - name: "Conceptual Understanding"
+    questions:
+      - id: "con1"
+        type: "true_false"
+        difficulty: "easy"
+        points: 1
+        question: "RAG and fine-tuning serve the exact same purpose and are always interchangeable."
+        correct_answer: "false"
+        explanation: "RAG focuses on context optimization (providing relevant information), while fine-tuning focuses on behavior optimization (adjusting model responses). They solve different types of problems."
+        tags: ["rag", "fine-tuning", "comparison"]
+
+      - id: "con2"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "When should you choose fine-tuning over RAG?"
+        options:
+          - id: "a"
+            text: "When you need the model to access up-to-date external documents"
+          - id: "b"
+            text: "When the model has behavioral issues like producing correct but irrelevant output"
+          - id: "c"
+            text: "When you want to avoid any model training"
+          - id: "d"
+            text: "When you need real-time web search capabilities"
+        correct_answer: "b"
+        explanation: "Fine-tuning is preferred when the issue is behavioral (e.g., correct but irrelevant responses), while RAG is better for providing external knowledge."
+        tags: ["fine-tuning", "rag", "decision-making"]
+
+      - id: "con3"
+        type: "single_choice"
+        difficulty: "easy"
+        points: 1
+        question: "Simple retrieval in a RAG pipeline typically refers to:"
+        options:
+          - id: "a"
+            text: "Fine-tuning the model on retrieval tasks"
+          - id: "b"
+            text: "Term-based retrieval such as keyword search"
+          - id: "c"
+            text: "Manually pasting text into the prompt"
+          - id: "d"
+            text: "Training a new retrieval model from scratch"
+        correct_answer: "b"
+        explanation: "Simple retrieval in the RAG pipeline refers to basic approaches like term-based or keyword search."
+        tags: ["rag", "retrieval"]
+
+      - id: "con4"
+        type: "single_choice"
+        difficulty: "medium"
+        points: 2
+        question: "Complex retrieval in a RAG pipeline can include which of the following?"
+        options:
+          - id: "a"
+            text: "Only simple keyword matching"
+          - id: "b"
+            text: "Hybrid search combining multiple retrieval strategies"
+          - id: "c"
+            text: "Only fine-tuning the model"
+          - id: "d"
+            text: "Removing all external data sources"
+        correct_answer: "b"
+        explanation: "Complex retrieval goes beyond simple term-based search and can include hybrid approaches combining different retrieval strategies."
+        tags: ["rag", "retrieval", "hybrid-search"]
+
+      - id: "con5"
+        type: "true_false"
+        difficulty: "medium"
+        points: 2
+        question: "A smaller fine-tuned model can sometimes outperform a larger non-fine-tuned model on specific tasks."
+        correct_answer: "true"
+        explanation: "Through distillation and task-specific fine-tuning, smaller models can exceed the performance of larger general-purpose models on targeted tasks."
+        tags: ["fine-tuning", "distillation", "model-size"]
+
+      - id: "con6"
+        type: "single_choice"
+        difficulty: "hard"
+        points: 4
+        question: "Which combination of techniques represents the most advanced stage of the application development flow?"
+        options:
+          - id: "a"
+            text: "Prompt engineering alone"
+          - id: "b"
+            text: "Prompt engineering with few-shot examples"
+          - id: "c"
+            text: "RAG with a fine-tuned model"
+          - id: "d"
+            text: "Simple keyword retrieval"
+        correct_answer: "c"
+        explanation: "RAG with a fine-tuned model combines both context optimization and behavior optimization, representing the most mature stage of the development flow."
+        tags: ["development-flow", "rag", "fine-tuning", "advanced"]

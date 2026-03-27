@@ -1,0 +1,30 @@
+﻿exam:
+  title: "Minimal Quiz"
+  description: "A tiny starter exam that demonstrates the minimum valid structure."
+  version: "1.0"
+  author: "PaperBench Team"
+
+settings:
+  timer_mode: "global"
+  total_time_minutes: 10
+  allow_review: true
+  show_correct_after_submit: true
+  pass_percentage: 60
+
+sections:
+  - name: "Basics"
+    questions:
+      - id: "q1"
+        type: "single_choice"
+        difficulty: "easy"
+        points: 1
+        question: "Which number is even?"
+        options:
+          - id: "a"
+            text: "3"
+          - id: "b"
+            text: "4"
+        correct_answer: "b"
+        tags: ["numbers"]
+
+
